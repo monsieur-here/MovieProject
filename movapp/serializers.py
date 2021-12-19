@@ -1,6 +1,13 @@
 from django.db.models import fields
 from rest_framework import serializers
-from .models import Genre, Movie
+from .models import Genre, Movie, userLogin
+
+class userLoginSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=userLogin
+        fields=[
+            'name', 'password'
+        ]
 
 class MovieSerializer(serializers.ModelSerializer):
     class Meta:
