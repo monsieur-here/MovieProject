@@ -19,12 +19,13 @@ from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
 from rest_framework.permissions import AllowAny
 from rest_framework.authtoken.views import obtain_auth_token
+from movapp import views
 
 # Serializers define the API representation.
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ['url', 'username', 'email', 'is_staff']
+        fields = '__all__'
 
 # ViewSets define the view behavior.
 class UserViewSet(viewsets.ModelViewSet):
@@ -44,6 +45,7 @@ urlpatterns = [
     path('', include(router.urls)),
     path('',include('movapp.urls')),
     path('admin/', admin.site.urls),
+    path('register/', views.register, name='register'),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('api-token/', obtain_auth_token, name='obtain')
 ]

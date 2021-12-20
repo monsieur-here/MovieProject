@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models import Count
+
 
 # Create your models here.
 class userLogin(models.Model):
@@ -16,3 +18,8 @@ class Movie(models.Model):
     description=models.TextField()
     genres=models.ForeignKey(Genre,on_delete=models.SET_NULL,null=True,blank=True)
     uuid=models.UUIDField()
+
+
+
+    
+

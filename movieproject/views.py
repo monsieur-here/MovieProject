@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 
 
-from movapp.serializers import GenreSerializer, MovieSerializer, userLoginSerializer
+from movapp.serializers import GenreSerializer, MovieSerializer
 from rest_framework.pagination import PageNumberPagination
 
 class MovieList(ListAPIView):
@@ -19,22 +19,21 @@ class MovieList(ListAPIView):
     serializer_class = MovieSerializer
     pagination_class = PageNumberPagination
 
-    def get(self, request, *args, **kwargs):
-        qs = userLogin.objects.all()
-        serializer_class = userLoginSerializer(qs, many=True)
-        return Response(serializer_class.data)
+    # def get(self, request, *args, **kwargs):
+    #     qs = userLogin.objects.all()
+    #     serializer_class = userLoginSerializer(qs, many=True)
+    #     return Response(serializer_class.data)
     
-    def post(self, request, *args, **kwargs):
-        serializer_class = userLoginSerializer(data=request.data)
+    # def post(self, request, *args, **kwargs):
+    #     serializer_class = userLoginSerializer(data=request.data)
 
-        if serializer_class.is_valid():
-            serializer_class.save()
-            return Response(serializer_class.data)
-        return Response(serializer_class.errors)
+    #     if serializer_class.is_valid():
+    #         serializer_class.save()
+    #         return Response(serializer_class.data)
+    #     return Response(serializer_class.errors)
 
 class MovieCreateView(CreateAPIView):
 
-    permission_classes = (AllowAny, )
     queryset = Movie.objects.all()
     serializer_class = MovieSerializer
 
@@ -47,3 +46,19 @@ class GenreListView(ListCreateAPIView):
     queryset = Genre.objects.all()
     serializer_class = GenreSerializer
     pagination_class = PageNumberPagination
+
+# class CollectionView(ListAPIView):
+
+#     def get(self, request, *args, **kwargs):
+#             qs = Collection.objects.all()
+#             serializer_class = CollectionSerializer(qs, many=True)
+#             return Response(serializer_class.data)
+        
+#     def post(self, request, *args, **kwargs):
+#         serializer_class = CollectionSerializer(data=request.data)
+
+#         if serializer_class.is_valid():
+#             serializer_class.save()
+#             return Response(serializer_class.data)
+#         return Response(serializer_class.errors)
+
